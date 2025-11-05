@@ -8,10 +8,14 @@ function Hero3D() {
     if (!mountRef.current) return
 
     let renderer
+    let scene
+    let camera
+    let frameId
+    
     try {
       // Scene setup
-      const scene = new THREE.Scene()
-      const camera = new THREE.PerspectiveCamera(
+      scene = new THREE.Scene()
+      camera = new THREE.PerspectiveCamera(
         75,
         mountRef.current.clientWidth / mountRef.current.clientHeight,
         0.1,
@@ -103,7 +107,6 @@ function Hero3D() {
     window.addEventListener('mousemove', handleMouseMove)
 
     // Animation loop
-    let frameId
     const animate = () => {
       frameId = requestAnimationFrame(animate)
 
