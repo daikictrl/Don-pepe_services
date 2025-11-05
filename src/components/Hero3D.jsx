@@ -7,18 +7,31 @@ function Hero3D() {
   useEffect(() => {
     if (!mountRef.current) return
 
-    // Scene setup
-    const scene = new THREE.Scene()
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      mountRef.current.clientWidth / mountRef.current.clientHeight,
-      0.1,
-      1000
-    )
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
-    renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight)
-    renderer.setPixelRatio(window.devicePixelRatio)
-    mountRef.current.appendChild(renderer.domElement)
+    let renderer
+    try {
+      // Scene setup
+      const scene = new THREE.Scene()
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        mountRef.current.clientWidth / mountRef.current.clientHeight,
+        0.1,
+        1000
+      )
+      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
+      
+      // Check if WebGL is actually available
+      if (!renderer.getContext()) {
+        console.warn('WebGL not available, skipping 3D hero animation')
+        return
+      }
+      
+      renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight)
+      renderer.setPixelRatio(window.devicePixelRatio)
+      mountRef.current.appendChild(renderer.domElement)
+    } catch (error) {
+      console.warn('Failed to initialize WebGL:', error.message)
+      return
+    }
 
     // Lighting
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.6)
@@ -115,10 +128,12 @@ function Hero3D() {
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('resize', handleResize)
       if (frameId) cancelAnimationFrame(frameId)
-      if (mountRef.current && renderer.domElement) {
+      if (mountRef.current && renderer && renderer.domElement && mountRef.current.contains(renderer.domElement)) {
         mountRef.current.removeChild(renderer.domElement)
       }
-      renderer.dispose()
+      if (renderer) {
+        renderer.dispose()
+      }
     }
   }, [])
 
