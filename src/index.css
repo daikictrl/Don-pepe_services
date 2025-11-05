@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    @apply bg-dark text-gray-100 font-sans antialiased transition-colors duration-300;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
+  }
+  
+  [data-theme="light"] body {
+    @apply bg-dark-light;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Animated glow effect */
+  .glow-effect {
+    @apply relative;
+  }
+  
+  .glow-effect::before {
+    content: '';
+    @apply absolute inset-0 rounded-lg opacity-50 blur-xl;
+    background: linear-gradient(135deg, #d4af37, #6b46c1);
+    animation: glow 2s ease-in-out infinite alternate;
+    z-index: -1;
+  }
+  
+  /* Spotlight effect */
+  .spotlight {
+    background: linear-gradient(
+      110deg,
+      transparent 40%,
+      rgba(212, 175, 55, 0.1) 50%,
+      transparent 60%
+    );
+    background-size: 200% 100%;
+    animation: spotlight 3s ease-in-out infinite alternate;
+  }
+  
+  /* Click spark effect */
+  .click-spark {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .click-spark::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.6) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0;
+  }
+  
+  .click-spark:active::after {
+    animation: spark 0.6s ease-out;
+  }
+  
+  @keyframes spark {
+    0% {
+      width: 0;
+      height: 0;
+      opacity: 1;
+    }
+    100% {
+      width: 300px;
+      height: 300px;
+      opacity: 0;
+    }
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-dark-light;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gold rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gold-light;
+}
+
