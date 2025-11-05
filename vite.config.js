@@ -10,10 +10,17 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3000,
-    open: true,
-    host: true
+    port: 5000,
+    host: '0.0.0.0',
+    strictPort: true,
+    hmr: {
+      clientPort: 5000
+    }
   },
-  publicDir: 'public'
+  publicDir: 'public',
+  preview: {
+    port: 5000,
+    host: '0.0.0.0'
+  }
 })
 
