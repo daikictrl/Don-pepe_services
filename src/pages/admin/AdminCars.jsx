@@ -1,11 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { carsData } from '../../data/cars'
+import { DataManager } from '../../utils/dataManager'
 import ClickSpark from '../../components/animations/ClickSpark'
 import Dock from '../../components/animations/Dock'
 
 function AdminCars() {
-  const [cars, setCars] = useState(carsData)
+  const [cars, setCars] = useState([])
+
+  useEffect(() => {
+    setCars(DataManager.getCars())
+  }, [])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingCar, setEditingCar] = useState(null)
   const [uploadedImages, setUploadedImages] = useState([])
@@ -48,21 +52,32 @@ function AdminCars() {
 
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this car?')) {
-      setCars(cars.filter(car => car.id !== id))
+      const updatedCars = cars.filter(car => car.id !== id)
+      setCars(updatedCars)
+      DataManager.saveCars(updatedCars)
     }
   }
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const files = Array.from(e.target.files)
-    const imageUrls = files.map(file => URL.createObjectURL(file))
-    setUploadedImages(imageUrls)
+    const base64Images = await Promise.all(
+      files.map(file => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader()
+          reader.onload = () => resolve(reader.result)
+          reader.onerror = reject
+          reader.readAsDataURL(file)
+        })
+      })
+    )
+    setUploadedImages(base64Images)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // In a real app, this would save to a backend
+    let updatedCars
     if (editingCar) {
-      setCars(cars.map(car => 
+      updatedCars = cars.map(car => 
         car.id === editingCar.id 
           ? { 
               ...car, 
@@ -77,21 +92,23 @@ function AdminCars() {
               } 
             }
           : car
-      ))
+      )
     } else {
       const newCar = {
-        id: cars.length + 1,
+        id: Date.now(),
         name: formData.name,
         folder: formData.folder,
-        images: uploadedImages,
+        images: uploadedImages.length > 0 ? uploadedImages : ['/images/logo.svg'],
         specs: {
           year: formData.year,
           transmission: formData.transmission,
           color: formData.color
         }
       }
-      setCars([...cars, newCar])
+      updatedCars = [...cars, newCar]
     }
+    setCars(updatedCars)
+    DataManager.saveCars(updatedCars)
     setIsModalOpen(false)
   }
 

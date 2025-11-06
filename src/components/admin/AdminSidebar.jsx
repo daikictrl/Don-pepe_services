@@ -8,10 +8,8 @@ import Dock from '../animations/Dock'
 
 function AdminSidebar() {
   const { user, logout } = useAuth()
-  const { language, setLanguage } = useLanguage()
   const location = useLocation()
   const navigate = useNavigate()
-  const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false)
 
   const menuItems = [
     { path: '/admin/dashboard', icon: 'tachometer-alt', label: 'Dashboard' },
@@ -36,54 +34,6 @@ function AdminSidebar() {
           <img src="/images/logo.svg" alt="Don Pépé Logo" className="h-10 mb-3" />
           <h2 className="text-xl font-serif text-gold">Don Pépé Admin</h2>
           <p className="text-gray-400 text-xs">Luxury Management</p>
-        </div>
-
-        {/* Language Selector */}
-        <div className="mb-6 relative">
-          <ClickSpark>
-            <Dock>
-              <button
-                onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-                className="w-full flex items-center justify-between px-4 py-3 bg-gold/10 border border-gold/20 rounded-lg text-gray-300 hover:bg-gold/20 hover:text-gold transition-all"
-              >
-                <div className="flex items-center gap-3">
-                  <i className="fas fa-globe text-gold"></i>
-                  <span className="text-sm font-semibold uppercase">{language === 'en' ? 'English' : 'Français'}</span>
-                </div>
-                <i className={`fas fa-chevron-${isLangDropdownOpen ? 'up' : 'down'} text-xs text-gold`}></i>
-              </button>
-              {isLangDropdownOpen && (
-                <>
-                  <div 
-                    className="fixed inset-0 z-0"
-                    onClick={() => setIsLangDropdownOpen(false)}
-                  />
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="absolute top-full left-0 right-0 mt-2 w-full bg-dark-light border border-gold/20 rounded-lg shadow-xl overflow-hidden z-50"
-                  >
-                    <button
-                      onClick={() => { setLanguage('en'); setIsLangDropdownOpen(false); }}
-                      className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-gold/10 transition-colors ${
-                        language === 'en' ? 'text-gold' : 'text-gray-300'
-                      }`}
-                    >
-                      <i className="fas fa-flag"></i> English
-                    </button>
-                    <button
-                      onClick={() => { setLanguage('fr'); setIsLangDropdownOpen(false); }}
-                      className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-gold/10 transition-colors border-t border-gold/10 ${
-                        language === 'fr' ? 'text-gold' : 'text-gray-300'
-                      }`}
-                    >
-                      <i className="fas fa-flag"></i> Français
-                    </button>
-                  </motion.div>
-                </>
-              )}
-            </Dock>
-          </ClickSpark>
         </div>
 
         {/* Navigation */}

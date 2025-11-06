@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
 import { useLanguage } from '../contexts/LanguageContext'
-import { carsData } from '../data/cars'
+import { DataManager } from '../utils/dataManager'
 import CarGalleryModal from '../components/CarGalleryModal'
 import ClickSpark from '../components/animations/ClickSpark'
 import Dock from '../components/animations/Dock'
@@ -12,6 +12,13 @@ function Services() {
   const location = useLocation()
   const [selectedCar, setSelectedCar] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [cars, setCars] = useState([])
+  const [properties, setProperties] = useState([])
+
+  useEffect(() => {
+    setCars(DataManager.getCars())
+    setProperties(DataManager.getProperties())
+  }, [])
 
   useEffect(() => {
     // Scroll to anchor if hash is present
@@ -32,36 +39,6 @@ function Services() {
     setSelectedCar(car)
     setIsModalOpen(true)
   }
-
-  const properties = [
-    {
-      name: 'Palm Jumeirah Villa',
-      price: '$5,500,000',
-      image: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-      beds: 5,
-      baths: 6,
-      sqft: '7,500',
-      description: 'Exclusive beachfront villa with private pool and stunning sea views.'
-    },
-    {
-      name: 'Downtown Penthouse',
-      price: '$3,800,000',
-      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-      beds: 4,
-      baths: 5,
-      sqft: '5,200',
-      description: 'Luxurious penthouse with panoramic views of Burj Khalifa and Downtown Dubai.'
-    },
-    {
-      name: 'Emirates Hills Mansion',
-      price: '$4,200,000',
-      image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-      beds: 6,
-      baths: 7,
-      sqft: '10,000',
-      description: 'Elegant mansion in the prestigious Emirates Hills with golf course views.'
-    }
-  ]
 
   return (
     <div className="pt-20 min-h-screen">
@@ -203,7 +180,7 @@ function Services() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {carsData.map((car, index) => (
+            {cars.map((car, index) => (
               <motion.div
                 key={car.id}
                 initial={{ opacity: 0, scale: 0.9 }}

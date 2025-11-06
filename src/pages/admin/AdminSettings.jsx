@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useTheme } from '../../contexts/ThemeContext'
+import { DataManager } from '../../utils/dataManager'
 import ClickSpark from '../../components/animations/ClickSpark'
 import Dock from '../../components/animations/Dock'
 
@@ -16,9 +17,12 @@ function AdminSettings() {
     address: 'Dubai, UAE'
   })
 
+  useEffect(() => {
+    setSettings(DataManager.getSettings())
+  }, [])
+
   const handleSave = () => {
-    // In a real app, this would save to backend
-    localStorage.setItem('adminSettings', JSON.stringify(settings))
+    DataManager.saveSettings(settings)
     alert('Settings saved successfully!')
   }
 

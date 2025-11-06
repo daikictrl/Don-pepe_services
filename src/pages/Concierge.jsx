@@ -1,45 +1,18 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useLanguage } from '../contexts/LanguageContext'
+import { DataManager } from '../utils/dataManager'
 import ClickSpark from '../components/animations/ClickSpark'
 import Dock from '../components/animations/Dock'
 
 function Concierge() {
   const { t } = useLanguage()
+  const [services, setServices] = useState([])
 
-  const services = [
-    {
-      icon: 'plane',
-      title: t('travel_arrangements'),
-      description: t('travel_desc')
-    },
-    {
-      icon: 'utensils',
-      title: t('dining_experiences'),
-      description: t('dining_desc')
-    },
-    {
-      icon: 'ticket-alt',
-      title: t('event_access'),
-      description: t('event_desc')
-    },
-    {
-      icon: 'shopping-bag',
-      title: t('personal_shopping'),
-      description: t('shopping_desc')
-    },
-    {
-      icon: 'spa',
-      title: t('wellness_services'),
-      description: t('wellness_desc')
-    },
-    {
-      icon: 'glass-cheers',
-      title: t('special_occasions'),
-      description: t('occasions_desc')
-    }
-  ]
+  useEffect(() => {
+    setServices(DataManager.getConcierge())
+  }, [])
 
   return (
     <div className="pt-20 min-h-screen">

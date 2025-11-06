@@ -1,41 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { DataManager } from '../../utils/dataManager'
 import ClickSpark from '../../components/animations/ClickSpark'
 import Dock from '../../components/animations/Dock'
 
 function AdminProperties() {
-  const [properties, setProperties] = useState([
-    {
-      id: 1,
-      name: 'Palm Jumeirah Villa',
-      image: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-      beds: 5,
-      baths: 6,
-      sqft: '7,500',
-      description: 'Exclusive beachfront villa with private pool and stunning sea views.'
-    },
-    {
-      id: 2,
-      name: 'Downtown Penthouse',
-      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-      beds: 4,
-      baths: 5,
-      sqft: '5,200',
-      description: 'Luxurious penthouse with panoramic views of Burj Khalifa and Downtown Dubai.'
-    },
-    {
-      id: 3,
-      name: 'Emirates Hills Mansion',
-      image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-      beds: 6,
-      baths: 7,
-      sqft: '10,000',
-      description: 'Elegant mansion in the prestigious Emirates Hills with golf course views.'
-    }
-  ])
-
+  const [properties, setProperties] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingProperty, setEditingProperty] = useState(null)
+  const [uploadedImages, setUploadedImages] = useState([])
   const [formData, setFormData] = useState({
     name: '',
     beds: '',
@@ -43,6 +16,10 @@ function AdminProperties() {
     sqft: '',
     description: ''
   })
+
+  useEffect(() => {
+    setProperties(DataManager.getProperties())
+  }, [])
 
   const handleAdd = () => {
     setEditingProperty(null)
@@ -53,6 +30,7 @@ function AdminProperties() {
       sqft: '',
       description: ''
     })
+    setUploadedImages([])
     setIsModalOpen(true)
   }
 
@@ -65,31 +43,58 @@ function AdminProperties() {
       sqft: property.sqft,
       description: property.description
     })
+    setUploadedImages([])
     setIsModalOpen(true)
   }
 
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this property?')) {
-      setProperties(properties.filter(property => property.id !== id))
+      const updatedProperties = properties.filter(property => property.id !== id)
+      setProperties(updatedProperties)
+      DataManager.saveProperties(updatedProperties)
     }
+  }
+
+  const handleImageChange = async (e) => {
+    const files = Array.from(e.target.files)
+    const base64Images = await Promise.all(
+      files.map(file => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader()
+          reader.onload = () => resolve(reader.result)
+          reader.onerror = reject
+          reader.readAsDataURL(file)
+        })
+      })
+    )
+    setUploadedImages(base64Images)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    let updatedProperties
     if (editingProperty) {
-      setProperties(properties.map(property => 
+      updatedProperties = properties.map(property => 
         property.id === editingProperty.id 
-          ? { ...property, ...formData }
+          ? { 
+              ...property, 
+              ...formData,
+              image: uploadedImages.length > 0 ? uploadedImages[0] : property.image,
+              images: uploadedImages.length > 0 ? uploadedImages : (property.images || [property.image])
+            }
           : property
-      ))
+      )
     } else {
       const newProperty = {
-        id: properties.length + 1,
+        id: Date.now(),
         ...formData,
-        image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
+        image: uploadedImages.length > 0 ? uploadedImages[0] : 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        images: uploadedImages.length > 0 ? uploadedImages : []
       }
-      setProperties([...properties, newProperty])
+      updatedProperties = [...properties, newProperty]
     }
+    setProperties(updatedProperties)
+    DataManager.saveProperties(updatedProperties)
     setIsModalOpen(false)
   }
 
@@ -229,6 +234,22 @@ function AdminProperties() {
                   className="w-full px-4 py-3 bg-dark border border-gold/20 rounded-lg text-gray-100 focus:border-gold focus:outline-none"
                   required
                 />
+              </div>
+              <div>
+                <label className="block text-gold mb-2">Property Images (1-6 images)</label>
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="w-full px-4 py-3 bg-dark border border-gold/20 rounded-lg text-gray-100 focus:border-gold focus:outline-none"
+                />
+                {uploadedImages.length > 0 && (
+                  <p className="text-gold text-sm mt-2">
+                    <i className="fas fa-check-circle mr-2"></i>
+                    {uploadedImages.length} image(s) uploaded
+                  </p>
+                )}
               </div>
               <div className="flex gap-4">
                 <ClickSpark>

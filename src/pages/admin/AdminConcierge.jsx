@@ -1,47 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { DataManager } from '../../utils/dataManager'
 import ClickSpark from '../../components/animations/ClickSpark'
 import Dock from '../../components/animations/Dock'
 
 function AdminConcierge() {
-  const [services, setServices] = useState([
-    {
-      id: 1,
-      icon: 'plane',
-      title: 'Travel Arrangements',
-      description: 'Private jet charters, luxury yacht rentals, VIP airport transfers, and bespoke travel itineraries tailored to your preferences.'
-    },
-    {
-      id: 2,
-      icon: 'utensils',
-      title: 'Dining Experiences',
-      description: 'Reservations at exclusive restaurants, private chef services, culinary tours, and access to Michelin-starred dining establishments.'
-    },
-    {
-      id: 3,
-      icon: 'ticket-alt',
-      title: 'Event Access',
-      description: 'VIP tickets to sold-out events, exclusive private parties, cultural experiences, and access to the most prestigious gatherings.'
-    },
-    {
-      id: 4,
-      icon: 'shopping-bag',
-      title: 'Personal Shopping',
-      description: 'Exclusive shopping experiences, access to limited collections, personal styling services, and private shopping appointments.'
-    },
-    {
-      id: 5,
-      icon: 'spa',
-      title: 'Wellness Services',
-      description: 'Private spa treatments, personal wellness consultations, fitness trainers, and holistic health experiences.'
-    },
-    {
-      id: 6,
-      icon: 'glass-cheers',
-      title: 'Special Occasions',
-      description: 'Bespoke event planning for celebrations, weddings, anniversaries, and special moments with meticulous attention to detail.'
-    }
-  ])
+  const [services, setServices] = useState([])
+
+  useEffect(() => {
+    setServices(DataManager.getConcierge())
+  }, [])
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingService, setEditingService] = useState(null)
@@ -73,25 +41,30 @@ function AdminConcierge() {
 
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this service?')) {
-      setServices(services.filter(service => service.id !== id))
+      const updatedServices = services.filter(service => service.id !== id)
+      setServices(updatedServices)
+      DataManager.saveConcierge(updatedServices)
     }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    let updatedServices
     if (editingService) {
-      setServices(services.map(service => 
+      updatedServices = services.map(service => 
         service.id === editingService.id 
           ? { ...service, ...formData }
           : service
-      ))
+      )
     } else {
       const newService = {
-        id: services.length + 1,
+        id: Date.now(),
         ...formData
       }
-      setServices([...services, newService])
+      updatedServices = [...services, newService]
     }
+    setServices(updatedServices)
+    DataManager.saveConcierge(updatedServices)
     setIsModalOpen(false)
   }
 
