@@ -1,0 +1,51 @@
+CLIENT SIDE MODIFICATIONS
+
+
+Task 1:
+Add a search bar at the top right corner of the “Luxury Cars” section on the client-facing (public) side of the website.
+
+Goal:
+Allow users to search for cars by name, brand, or model in real time for faster access to desired listings.
+
+Design Requirements:
+
+Place the search bar centered horizontally at the top right corner of the “Luxury Cars” section, above the car cards grid.
+
+Use a modern, minimal, and luxury-themed style (rounded edges, subtle shadows, gold or white glow for focus state).
+
+Placeholder text: “Search cars by name, brand, or model...”
+
+The input field should slightly expand on focus (smooth animation, 0.2s transition).
+
+Add a magnifying glass icon inside or to the right of the input field.
+
+Functional Requirements:
+
+Implement live search filtering — as the user types, the car listings should update dynamically to show only matching results.
+
+The search should be case-insensitive and should match any part of the car’s name, brand, or model.
+
+If no results are found, display a friendly message: “No cars match your search.”
+
+Include debounce (500ms delay) before triggering the search to avoid excessive filtering.
+
+Support scalability: if a backend exists, the search should make API calls (e.g., /api/cars?search=<query>); otherwise, perform client-side filtering.
+
+Technical Notes:
+
+Use useState and useEffect for React-based state management.
+
+Ensure it integrates smoothly with the existing car card components and theme toggle (light/dark mode).
+
+Optimize for performance even with large datasets.
+
+Accessibility:
+
+Input should be focusable with the Tab key and labeled properly for screen readers (e.g., aria-label="Search Cars").
+
+Maintain visible focus outline in both light and dark themes
+
+
+
+Task 2:
+I want you to fix the speed of image loading in the services page because, It takes long for images to load which is very unprofessional. Please increase the speed of image loading making the site have a more smooth/professional feel 

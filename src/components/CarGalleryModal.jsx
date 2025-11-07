@@ -83,6 +83,8 @@ function CarGalleryModal({ car, isOpen, onClose }) {
                   key={currentIndex}
                   src={car.images[currentIndex]}
                   alt={car.name}
+                  loading="eager"
+                  decoding="async"
                   className="w-full h-full object-contain"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -92,6 +94,13 @@ function CarGalleryModal({ car, isOpen, onClose }) {
                     console.error('Image failed to load:', car.images[currentIndex])
                   }}
                 />
+                {/* Preload next and previous images */}
+                {car.images.length > 1 && (
+                  <>
+                    <link rel="preload" as="image" href={car.images[(currentIndex + 1) % car.images.length]} />
+                    <link rel="preload" as="image" href={car.images[(currentIndex - 1 + car.images.length) % car.images.length]} />
+                  </>
+                )}
 
                 {/* Navigation Buttons */}
                 {car.images.length > 1 && (
@@ -140,6 +149,8 @@ function CarGalleryModal({ car, isOpen, onClose }) {
                       <img
                         src={img}
                         alt={`${car.name} ${index + 1}`}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-20 object-cover"
                         onError={(e) => {
                           e.target.src = '/images/logo.svg'

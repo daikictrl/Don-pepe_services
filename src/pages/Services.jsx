@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
 import { useLanguage } from '../contexts/LanguageContext'
@@ -14,11 +14,43 @@ function Services() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [cars, setCars] = useState([])
   const [properties, setProperties] = useState([])
+  const [searchQuery, setSearchQuery] = useState('')
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('')
 
   useEffect(() => {
     setCars(DataManager.getCars())
     setProperties(DataManager.getProperties())
   }, [])
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchQuery(searchQuery)
+    }, 500)
+
+    return () => clearTimeout(timer)
+  }, [searchQuery])
+
+  const filteredCars = useMemo(() => {
+    if (!debouncedSearchQuery.trim()) {
+      return cars
+    }
+
+    const query = debouncedSearchQuery.toLowerCase()
+    return cars.filter(car => {
+      const searchableFields = [
+        car.name,
+        car.specs?.year,
+        car.specs?.engine,
+        car.specs?.color,
+        car.specs?.transmission,
+        car.folder
+      ].filter(Boolean)
+
+      return searchableFields.some(field =>
+        field.toString().toLowerCase().includes(query)
+      )
+    })
+  }, [cars, debouncedSearchQuery])
 
   useEffect(() => {
     // Scroll to anchor if hash is present
@@ -56,7 +88,7 @@ function Services() {
         
         <div className="relative z-10 container mx-auto px-4 text-center">
           <motion.h1
-            className="text-6xl md:text-8xl font-serif text-gold mb-6 uppercase tracking-wider"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-serif text-gold mb-6 uppercase tracking-wider"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -64,7 +96,7 @@ function Services() {
             {t('nav_services')}
           </motion.h1>
           <motion.p
-            className="text-xl text-gray-300"
+            className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -87,10 +119,10 @@ function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-16 px-4"
           >
-            <h2 className="text-5xl font-serif text-gold mb-4">{t('properties_title')}</h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-gold mb-4">{t('properties_title')}</h2>
+            <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto px-4">
               {t('exclusive_villas')}
             </p>
           </motion.div>
@@ -108,11 +140,14 @@ function Services() {
                 <ClickSpark>
                   <Dock>
                     <div className="bg-dark-light border border-gold/20 rounded-xl overflow-hidden hover:border-gold transition-all glow-effect h-full flex flex-col">
-                      <div className="relative h-56 overflow-hidden flex-shrink-0">
+                      <div className="relative h-56 overflow-hidden flex-shrink-0 bg-dark/50">
                         <img
                           src={property.image}
                           alt={property.name}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          style={{ contentVisibility: 'auto' }}
                         />
                       </div>
                       <div className="p-6 flex-grow flex flex-col">
@@ -171,16 +206,55 @@ function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-12 px-4"
           >
-            <h2 className="text-5xl font-serif text-gold mb-4">{t('vehicles_title')}</h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-gold mb-4">{t('vehicles_title')}</h2>
+            <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto px-4">
               From limited edition supercars to custom luxury vehicles
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {cars.map((car, index) => (
+          {/* Search Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl mx-auto mb-12 px-4 sm:px-0"
+          >
+            <div className="relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-gold via-purple to-gold rounded-lg blur opacity-30 group-focus-within:opacity-60 transition duration-200"></div>
+              <div className="relative flex items-center">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search cars by name, brand, or model..."
+                  aria-label="Search Cars"
+                  className="w-full px-4 sm:px-6 py-3 sm:py-4 pr-12 sm:pr-14 bg-dark border-2 border-gold/30 rounded-lg text-gray-200 placeholder-gray-500 text-sm sm:text-base focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all duration-200 focus:scale-[1.02]"
+                />
+                <div className="absolute right-4 sm:right-5 text-gold text-lg sm:text-xl pointer-events-none">
+                  <i className="fas fa-search"></i>
+                </div>
+              </div>
+            </div>
+            {searchQuery && (
+              <motion.p
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-xs sm:text-sm text-gray-400 mt-3 text-center"
+              >
+                {filteredCars.length === 0
+                  ? 'No cars match your search.'
+                  : `Found ${filteredCars.length} ${filteredCars.length === 1 ? 'car' : 'cars'}`}
+              </motion.p>
+            )}
+          </motion.div>
+
+          {/* Car Grid */}
+          {filteredCars.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filteredCars.map((car, index) => (
               <motion.div
                 key={car.id}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -193,18 +267,22 @@ function Services() {
                   <Dock>
                     <div className="bg-dark border border-gold/20 rounded-xl overflow-hidden hover:border-gold transition-all cursor-pointer glow-effect h-full flex flex-col">
                       <div
-                        className="relative h-56 overflow-hidden flex-shrink-0"
+                        className="relative h-56 overflow-hidden flex-shrink-0 bg-dark/50"
                         onClick={() => handleOpenModal(car)}
                       >
                         <img
                           src={car.images[0]}
                           alt={car.name}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          style={{ contentVisibility: 'auto' }}
                           onError={(e) => {
                             e.target.src = '/images/logo.svg'
                             console.error('Car image failed to load:', car.images[0])
                           }}
                         />
+                        <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       </div>
                       <div className="p-4 flex-grow flex flex-col">
                         <h3 className="text-lg font-serif text-gold mb-3 line-clamp-2 flex-shrink-0">{car.name}</h3>
@@ -235,6 +313,27 @@ function Services() {
               </motion.div>
             ))}
           </div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center py-20 px-4"
+            >
+              <div className="text-4xl sm:text-5xl md:text-6xl text-gold/30 mb-6">
+                <i className="fas fa-car"></i>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-serif text-gold mb-3">No cars match your search</h3>
+              <p className="text-sm sm:text-base text-gray-400 max-w-md mx-auto mb-6 px-4">
+                Try adjusting your search terms or browse all our luxury vehicles
+              </p>
+              <button
+                onClick={() => setSearchQuery('')}
+                className="px-6 sm:px-8 py-3 bg-gradient-to-r from-gold to-gold-dark text-dark font-semibold rounded-lg hover:shadow-lg transition-all uppercase tracking-wider text-sm sm:text-base"
+              >
+                Clear Search
+              </button>
+            </motion.div>
+          )}
         </div>
       </section>
 
