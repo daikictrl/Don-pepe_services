@@ -30,7 +30,7 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Logo Section */}
           <div>
-            <img src="/images/logo.svg" alt="Don Pépé Logo" className="h-12 mb-4" />
+            <img src="/images/logo.jpg" alt="Don Pépé Logo" className="h-12 mb-4" />
             <h3 className="text-2xl font-serif text-gold mb-2">Don Pépé</h3>
             <p className="text-gray-400 text-sm italic">Luxury Beyond Limits</p>
             <div className="flex gap-4 mt-6">
@@ -74,14 +74,6 @@ function Footer() {
                   </button>
                 </li>
               ))}
-              <li>
-                <a
-                  href="/admin/login"
-                  className="text-gray-400 hover:text-gold transition-colors text-sm text-left"
-                >
-                  <i className="fas fa-shield-alt mr-2"></i>Admin
-                </a>
-              </li>
             </ul>
           </div>
 

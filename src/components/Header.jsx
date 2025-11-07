@@ -39,7 +39,7 @@ function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
             <motion.img 
-              src="/images/logo.svg" 
+              src="/images/logo.jpg" 
               alt="Don Pépé Logo" 
               className="h-10 w-auto"
               whileHover={{ scale: 1.05 }}
