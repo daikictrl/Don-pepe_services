@@ -16,6 +16,13 @@ export default defineConfig({
     allowedHosts: true,
     hmr: {
       clientPort: 5000
+    },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false
+      }
     }
   },
   publicDir: 'public',
