@@ -4,6 +4,10 @@ const LanguageContext = createContext()
 
 const translations = {
   en: {
+    site_name: 'Don Pépé Services',
+    site_tagline: 'Luxury Beyond Limits',
+    meta_description: "Don Pépé Services - Luxury Beyond Limits. Discover exclusive properties, premium vehicles, and concierge services in Dubai.",
+    email_subject_contact: 'Inquiry from Don Pépé Services Website',
     nav_home: 'Home',
     nav_services: 'Services',
     nav_concierge: 'Concierge',
@@ -154,8 +158,52 @@ const translations = {
     admin_user_management: 'User Management',
     admin_ready_to_experience: 'Ready to Experience Luxury?',
     admin_contact_team: 'Contact our team today to discover how we can help you find your perfect luxury property or vehicle',
+    // Home page translations
+    home_about_title: 'About Don Pépé Services',
+    home_about_p1: 'Don Pépé Services is Dubai\'s premier luxury marketplace, specializing in exclusive real estate, premium vehicles, and bespoke concierge services. With over 15 years of experience serving distinguished clientele worldwide, we curate only the finest properties and vehicles.',
+    home_about_p2: 'Our portfolio includes stunning beachfront villas on Palm Jumeirah, luxurious penthouses in Downtown Dubai with Burj Khalifa views, and elegant mansions in Emirates Hills. Each property is carefully selected to meet the highest standards of luxury and sophistication.',
+    home_about_p3: 'Our vehicle collection features the world\'s most exclusive automobiles, from limited edition supercars to custom luxury vehicles. We work directly with manufacturers and collectors to bring you access to vehicles that are rarely available on the open market.',
+    home_services_subtitle: 'Experience unparalleled luxury with our exclusive collection of properties, vehicles, and services',
+    home_why_choose_title: 'Why Choose Don Pépé',
+    home_why_choose_subtitle: 'What sets us apart in the luxury market',
+    home_why_excellence: 'Excellence',
+    home_why_excellence_desc: 'Award-winning service recognized by luxury industry leaders',
+    home_why_trusted_network: 'Trusted Network',
+    home_why_trusted_desc: 'Access to exclusive listings and private collections worldwide',
+    home_why_security: 'Security',
+    home_why_security_desc: 'Complete confidentiality and secure transactions for all clients',
+    home_why_support: '24/7 Support',
+    home_why_support_desc: 'Dedicated concierge team available around the clock for your needs',
+    home_cta_ready: 'Ready to Experience Luxury?',
+    home_cta_contact: 'Contact our team today to discover how we can help you find your perfect luxury property or vehicle',
+    home_cta_get_started: 'Get Started',
+    // Services page translations
+    services_search_placeholder: 'Search cars by name, brand, or model...',
+    services_search_no_results: 'No cars match your search.',
+    services_search_found: 'Found {count} {plural}',
+    services_search_found_car: 'car',
+    services_search_found_cars: 'cars',
+    services_no_results_title: 'No cars match your search',
+    services_no_results_desc: 'Try adjusting your search terms or browse all our luxury vehicles',
+    services_clear_search: 'Clear Search',
+    services_vehicles_desc: 'From limited edition supercars to custom luxury vehicles',
+    services_beds: 'Beds',
+    services_baths: 'Baths',
+    services_sqft: 'sqft',
+    // Contact page
+    concierge_service_inquiry: 'Concierge Service Inquiry',
+    // Common UI elements
+    logo_alt: 'Don Pépé Logo',
+    admin_login_portal: 'Don Pépé Admin',
+    admin_login_access: 'Secure Access Portal',
+    admin_login_error: 'Login failed. Please check your credentials.',
+    admin_login_submit: 'Sign In',
   },
   fr: {
+    site_name: 'Don Pépé Services',
+    site_tagline: 'Luxe Exceptionnel',
+    meta_description: "Don Pépé Services - Luxe Exceptionnel. Découvrez des propriétés et véhicules de luxe à Dubaï.",
+    email_subject_contact: 'Demande depuis le site Don Pépé Services',
     nav_home: 'Accueil',
     nav_services: 'Services',
     nav_concierge: 'Conciergerie',
@@ -306,6 +354,46 @@ const translations = {
     admin_user_management: 'Gestion des Utilisateurs',
     admin_ready_to_experience: 'Prêt à Vivre le Luxe ?',
     admin_contact_team: 'Contactez notre équipe dès aujourd\'hui pour découvrir comment nous pouvons vous aider à trouver votre propriété ou véhicule de luxe idéal',
+    // Home page translations (French)
+    home_about_title: 'À Propos de Don Pépé Services',
+    home_about_p1: 'Don Pépé Services est le premier marché du luxe de Dubaï, se spécialisant dans l\'immobilier exclusif, les véhicules haut de gamme et les services de conciergerie sur mesure. Avec plus de 15 ans d\'expérience au service d\'une clientèle distinguée dans le monde entier, nous sélectionnons uniquement les propriétés et véhicules les plus raffinés.',
+    home_about_p2: 'Notre portefeuille comprend de magnifiques villas en bord de mer à Palm Jumeirah, des penthouses luxueux au centre-ville de Dubaï avec vue sur le Burj Khalifa, et des demeures élégantes aux Emirates Hills. Chaque propriété est soigneusement sélectionnée pour répondre aux plus hauts standards de luxe et de sophistication.',
+    home_about_p3: 'Notre collection de véhicules présente les automobiles les plus exclusives du monde, des supercars en édition limitée aux véhicules de luxe sur mesure. Nous travaillons directement avec les fabricants et les collectionneurs pour vous offrir un accès à des véhicules rarement disponibles sur le marché libre.',
+    home_services_subtitle: 'Expérience luxe incomparable avec notre collection exclusive de propriétés, véhicules et services',
+    home_why_choose_title: 'Pourquoi Choisir Don Pépé',
+    home_why_choose_subtitle: 'Ce qui nous distingue sur le marché du luxe',
+    home_why_excellence: 'Excellence',
+    home_why_excellence_desc: 'Service récompensé par les leaders de l\'industrie du luxe',
+    home_why_trusted_network: 'Réseau de Confiance',
+    home_why_trusted_desc: 'Accès à des annonces exclusives et des collections privées dans le monde entier',
+    home_why_security: 'Sécurité',
+    home_why_security_desc: 'Confidentialité complète et transactions sécurisées pour tous les clients',
+    home_why_support: 'Support 24/7',
+    home_why_support_desc: 'Équipe de conciergerie dédiée disponible 24h/24 pour vos besoins',
+    home_cta_ready: 'Prêt à Vivre le Luxe ?',
+    home_cta_contact: 'Contactez notre équipe dès aujourd\'hui pour découvrir comment nous pouvons vous aider',
+    home_cta_get_started: 'Commencer',
+    // Services page translations (French)
+    services_search_placeholder: 'Rechercher des voitures par nom, marque ou modèle...',
+    services_search_no_results: 'Aucune voiture ne correspond à votre recherche.',
+    services_search_found: 'Trouvé {count} {plural}',
+    services_search_found_car: 'voiture',
+    services_search_found_cars: 'voitures',
+    services_no_results_title: 'Aucune voiture ne correspond à votre recherche',
+    services_no_results_desc: 'Essayez d\'ajuster vos critères de recherche ou parcourez tous nos véhicules de luxe',
+    services_clear_search: 'Effacer la Recherche',
+    services_vehicles_desc: 'Des supercars en édition limitée aux véhicules de luxe sur mesure',
+    services_beds: 'Chambres',
+    services_baths: 'Salles de Bain',
+    services_sqft: 'pi²',
+    // Contact page
+    concierge_service_inquiry: 'Demande de Service de Conciergerie',
+    // Common UI elements
+    logo_alt: 'Logo Don Pépé',
+    admin_login_portal: 'Don Pépé Admin',
+    admin_login_access: 'Portail d\'Accès Sécurisé',
+    admin_login_error: 'Échec de la connexion. Veuillez vérifier vos identifiants.',
+    admin_login_submit: 'Se Connecter',
   }
 }
 
@@ -317,6 +405,19 @@ export function LanguageProvider({ children }) {
   useEffect(() => {
     localStorage.setItem('language', language)
     document.documentElement.lang = language
+    // Update document title and meta description for SEO when language changes
+    const title = translations[language]?.site_name
+    if (title) document.title = title
+    const desc = translations[language]?.meta_description
+    if (desc) {
+      let meta = document.querySelector('meta[name="description"]')
+      if (!meta) {
+        meta = document.createElement('meta')
+        meta.name = 'description'
+        document.head.appendChild(meta)
+      }
+      meta.content = desc
+    }
   }, [language])
 
   const t = (key) => {

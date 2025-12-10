@@ -23,7 +23,7 @@ function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const subject = encodeURIComponent(formData.subject || 'Inquiry from Don Pépé Services')
+    const subject = encodeURIComponent(formData.subject || t('email_subject_contact'))
     const body = encodeURIComponent(
       `Name: ${formData.name}\n` +
       `Email: ${formData.email}\n` +

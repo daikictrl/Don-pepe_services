@@ -41,36 +41,48 @@ const initialConcierge = [
   {
     id: 1,
     icon: 'plane',
+    titleKey: 'travel_arrangements',
+    descriptionKey: 'travel_desc',
     title: 'Travel Arrangements',
     description: 'Private jet charters, luxury yacht rentals, VIP airport transfers, and bespoke travel itineraries tailored to your preferences.'
   },
   {
     id: 2,
     icon: 'utensils',
+    titleKey: 'dining_experiences',
+    descriptionKey: 'dining_desc',
     title: 'Dining Experiences',
     description: 'Reservations at exclusive restaurants, private chef services, culinary tours, and access to Michelin-starred dining establishments.'
   },
   {
     id: 3,
     icon: 'ticket-alt',
+    titleKey: 'event_access',
+    descriptionKey: 'event_desc',
     title: 'Event Access',
     description: 'VIP tickets to sold-out events, exclusive private parties, cultural experiences, and access to the most prestigious gatherings.'
   },
   {
     id: 4,
     icon: 'shopping-bag',
+    titleKey: 'personal_shopping',
+    descriptionKey: 'shopping_desc',
     title: 'Personal Shopping',
     description: 'Exclusive shopping experiences, access to limited collections, personal styling services, and private shopping appointments.'
   },
   {
     id: 5,
     icon: 'spa',
+    titleKey: 'wellness_services',
+    descriptionKey: 'wellness_desc',
     title: 'Wellness Services',
     description: 'Private spa treatments, personal wellness consultations, fitness trainers, and holistic health experiences.'
   },
   {
     id: 6,
     icon: 'glass-cheers',
+    titleKey: 'special_occasions',
+    descriptionKey: 'occasions_desc',
     title: 'Special Occasions',
     description: 'Bespoke event planning for celebrations, weddings, anniversaries, and special moments with meticulous attention to detail.'
   }

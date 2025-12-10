@@ -39,7 +39,7 @@ function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
             <motion.img 
-              src="/images/logo.jpg" 
+              src="/images/logo.svg" 
               alt="Don Pépé Logo" 
               className="h-10 w-auto"
               whileHover={{ scale: 1.05 }}
@@ -47,10 +47,10 @@ function Header() {
             />
             <div>
               <h1 className="text-2xl font-serif bg-gradient-to-r from-gold via-gold-light to-purple-light bg-clip-text text-transparent">
-                Don Pépé
+                {t('site_name')}
               </h1>
               <span className="text-xs text-gold-light tracking-widest uppercase block">
-                Luxury Beyond Limits
+                {t('site_tagline')}
               </span>
             </div>
           </Link>

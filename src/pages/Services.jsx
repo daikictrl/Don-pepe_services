@@ -156,15 +156,15 @@ function Services() {
                         <div className="flex justify-between mb-4 pb-4 border-b border-gold/10">
                           <div className="text-gold">
                             <i className="fas fa-bed mr-2"></i>
-                            {property.beds} Beds
+                            {property.beds} {t('services_beds')}
                           </div>
                           <div className="text-gold">
                             <i className="fas fa-bath mr-2"></i>
-                            {property.baths} Baths
+                            {property.baths} {t('services_baths')}
                           </div>
                           <div className="text-gold">
                             <i className="fas fa-ruler-combined mr-2"></i>
-                            {property.sqft} sqft
+                            {property.sqft} {t('services_sqft')}
                           </div>
                         </div>
                         <div className="flex gap-4 mt-auto flex-shrink-0">
@@ -210,7 +210,7 @@ function Services() {
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-gold mb-4">{t('vehicles_title')}</h2>
             <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto px-4">
-              From limited edition supercars to custom luxury vehicles
+              {t('services_vehicles_desc')}
             </p>
           </motion.div>
 
@@ -229,7 +229,7 @@ function Services() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search cars by name, brand, or model..."
+                  placeholder={t('services_search_placeholder')}
                   aria-label="Search Cars"
                   className="w-full px-4 sm:px-6 py-3 sm:py-4 pr-12 sm:pr-14 bg-dark border-2 border-gold/30 rounded-lg text-gray-200 placeholder-gray-500 text-sm sm:text-base focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all duration-200 focus:scale-[1.02]"
                 />
@@ -245,8 +245,8 @@ function Services() {
                 className="text-xs sm:text-sm text-gray-400 mt-3 text-center"
               >
                 {filteredCars.length === 0
-                  ? 'No cars match your search.'
-                  : `Found ${filteredCars.length} ${filteredCars.length === 1 ? 'car' : 'cars'}`}
+                  ? t('services_search_no_results')
+                  : `${t('services_search_found').replace('{count}', filteredCars.length).replace('{plural}', filteredCars.length === 1 ? t('services_search_found_car') : t('services_search_found_cars'))}`}
               </motion.p>
             )}
           </motion.div>
@@ -322,15 +322,15 @@ function Services() {
               <div className="text-4xl sm:text-5xl md:text-6xl text-gold/30 mb-6">
                 <i className="fas fa-car"></i>
               </div>
-              <h3 className="text-xl sm:text-2xl font-serif text-gold mb-3">No cars match your search</h3>
+              <h3 className="text-xl sm:text-2xl font-serif text-gold mb-3">{t('services_no_results_title')}</h3>
               <p className="text-sm sm:text-base text-gray-400 max-w-md mx-auto mb-6 px-4">
-                Try adjusting your search terms or browse all our luxury vehicles
+                {t('services_no_results_desc')}
               </p>
               <button
                 onClick={() => setSearchQuery('')}
                 className="px-6 sm:px-8 py-3 bg-gradient-to-r from-gold to-gold-dark text-dark font-semibold rounded-lg hover:shadow-lg transition-all uppercase tracking-wider text-sm sm:text-base"
               >
-                Clear Search
+                {t('services_clear_search')}
               </button>
             </motion.div>
           )}

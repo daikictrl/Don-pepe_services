@@ -155,23 +155,11 @@ function Home() {
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h2 className="text-5xl font-serif text-gold mb-6">About Don Pépé Services</h2>
+            <h2 className="text-5xl font-serif text-gold mb-6">{t('home_about_title')}</h2>
             <div className="space-y-6 text-gray-300 text-lg leading-relaxed">
-              <p>
-                Don Pépé Services is Dubai's premier luxury marketplace, specializing in exclusive real estate, 
-                premium vehicles, and bespoke concierge services. With over 15 years of experience serving 
-                distinguished clientele worldwide, we curate only the finest properties and vehicles.
-              </p>
-              <p>
-                Our portfolio includes stunning beachfront villas on Palm Jumeirah, luxurious penthouses 
-                in Downtown Dubai with Burj Khalifa views, and elegant mansions in Emirates Hills. 
-                Each property is carefully selected to meet the highest standards of luxury and sophistication.
-              </p>
-              <p>
-                Our vehicle collection features the world's most exclusive automobiles, from limited 
-                edition supercars to custom luxury vehicles. We work directly with manufacturers and 
-                collectors to bring you access to vehicles that are rarely available on the open market.
-              </p>
+              <p>{t('home_about_p1')}</p>
+              <p>{t('home_about_p2')}</p>
+              <p>{t('home_about_p3')}</p>
             </div>
           </motion.div>
         </div>
@@ -189,7 +177,7 @@ function Home() {
           >
             <h2 className="text-5xl font-serif text-gold mb-4">{t('services_title')}</h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Experience unparalleled luxury with our exclusive collection of properties, vehicles, and services
+              {t('home_services_subtitle')}
             </p>
           </motion.div>
 
@@ -248,31 +236,31 @@ function Home() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-5xl font-serif text-gold mb-4">Why Choose Don Pépé</h2>
-            <p className="text-gray-400 text-lg">What sets us apart in the luxury market</p>
+            <h2 className="text-5xl font-serif text-gold mb-4">{t('home_why_choose_title')}</h2>
+            <p className="text-gray-400 text-lg">{t('home_why_choose_subtitle')}</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
                 icon: 'award',
-                title: 'Excellence',
-                description: 'Award-winning service recognized by luxury industry leaders'
+                title: t('home_why_excellence'),
+                description: t('home_why_excellence_desc')
               },
               {
                 icon: 'users',
-                title: 'Trusted Network',
-                description: 'Access to exclusive listings and private collections worldwide'
+                title: t('home_why_trusted_network'),
+                description: t('home_why_trusted_desc')
               },
               {
                 icon: 'shield-alt',
-                title: 'Security',
-                description: 'Complete confidentiality and secure transactions for all clients'
+                title: t('home_why_security'),
+                description: t('home_why_security_desc')
               },
               {
                 icon: 'headset',
-                title: '24/7 Support',
-                description: 'Dedicated concierge team available around the clock for your needs'
+                title: t('home_why_support'),
+                description: t('home_why_support_desc')
               }
             ].map((feature, index) => (
               <motion.div
@@ -303,9 +291,9 @@ function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-5xl font-serif text-gold mb-6">Ready to Experience Luxury?</h2>
+            <h2 className="text-5xl font-serif text-gold mb-6">{t('home_cta_ready')}</h2>
             <p className="text-gray-300 text-xl mb-10 max-w-2xl mx-auto">
-              Contact our team today to discover how we can help you find your perfect luxury property or vehicle
+              {t('home_cta_contact')}
             </p>
             <ClickSpark>
               <Dock>
@@ -314,7 +302,7 @@ function Home() {
                   onClick={handleNavClick}
                   className="inline-block px-10 py-5 bg-gradient-to-r from-gold to-gold-dark text-dark font-semibold rounded-lg shadow-lg glow-effect hover:shadow-xl transition-all uppercase tracking-wider text-lg"
                 >
-                  Get Started
+                  {t('home_cta_get_started')}
                 </Link>
               </Dock>
             </ClickSpark>

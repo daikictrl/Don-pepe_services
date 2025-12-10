@@ -83,8 +83,8 @@ function Concierge() {
                       >
                         <i className={`fas fa-${service.icon}`}></i>
                       </motion.div>
-                      <h3 className="text-2xl font-serif text-gold mb-4">{service.title}</h3>
-                      <p className="text-gray-400 leading-relaxed flex-grow">{service.description}</p>
+                      <h3 className="text-2xl font-serif text-gold mb-4">{service.titleKey ? t(service.titleKey) : service.title}</h3>
+                        <p className="text-gray-400 leading-relaxed flex-grow">{service.descriptionKey ? t(service.descriptionKey) : service.description}</p>
                       <Link
                         to="/contact"
                         className="inline-block mt-6 text-gold font-semibold hover:translate-x-2 transition-transform"
@@ -141,7 +141,7 @@ function Concierge() {
             <ClickSpark>
               <Dock>
                 <a
-                  href="mailto:donpepeservices@proton.me?subject=Concierge Service Inquiry"
+                  href="mailto:donpepeservices@proton.me?subject={t('concierge_service_inquiry')}"
                   className="block p-8 bg-dark border border-gold/20 rounded-xl hover:border-gold transition-all text-center glow-effect overflow-hidden"
                 >
                   <div className="text-5xl text-red-500 mb-4">

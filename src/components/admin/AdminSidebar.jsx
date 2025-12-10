@@ -31,9 +31,9 @@ function AdminSidebar() {
       <div className="p-6">
         {/* Logo */}
         <div className="mb-8">
-          <img src="/images/logo.jpg" alt="Don Pépé Logo" className="h-10 mb-3" />
-          <h2 className="text-xl font-serif text-gold">Don Pépé Admin</h2>
-          <p className="text-gray-400 text-xs">Luxury Management</p>
+          <img src="/images/logo.svg" alt="Don Pépé Logo" className="h-10 mb-3" />
+          <h2 className="text-xl font-serif text-gold">{t('admin_site_name')}</h2>
+          <p className="text-gray-400 text-xs">{t('admin_manage_inventory_desc')}</p>
         </div>
 
         {/* Navigation */}
