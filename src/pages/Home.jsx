@@ -82,15 +82,13 @@ function Home() {
           }}
         />
 
-        {/* 3D Car - Visible on all screen sizes, larger and more prominent */}
+        {/* 3D City - Covers entire hero section */}
         <motion.div
           style={{ opacity, scale }}
           className="absolute inset-0 z-0 pointer-events-none"
         >
-          <div className="absolute inset-0 flex items-center justify-center opacity-70 sm:opacity-80 md:opacity-85 lg:opacity-90">
-            <div className="w-full h-full max-w-6xl max-h-[500px] sm:max-h-[600px] lg:max-h-[700px] xl:max-h-[800px]">
-              <Hero3D scrollProgress={scrollYProgress} />
-            </div>
+          <div className="absolute inset-0 opacity-75 sm:opacity-80 md:opacity-85 lg:opacity-90">
+            <Hero3D scrollProgress={scrollYProgress} />
           </div>
         </motion.div>
 
