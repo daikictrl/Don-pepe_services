@@ -12,6 +12,7 @@ function Header() {
   const location = useLocation()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false)
+  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false)
 
   const navItems = [
     { path: '/', key: 'nav_home' },
@@ -133,7 +134,7 @@ function Header() {
 
           {/* Controls */}
           <div className="flex items-center gap-4">
-            {/* Language Selector */}
+            {/* Language Selector - Desktop */}
             <Dock className="hidden md:flex">
               <div className="relative group">
                 <button className="p-2 rounded-lg hover:bg-gold/10 transition-colors">
@@ -159,6 +160,53 @@ function Header() {
                 </div>
               </div>
             </Dock>
+
+            {/* Language Selector - Mobile */}
+            <div className="md:hidden relative">
+              <button 
+                onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
+                className="p-2 rounded-lg hover:bg-gold/10 transition-colors"
+              >
+                <i className="fas fa-globe text-gold text-lg"></i>
+              </button>
+              {isLanguageDropdownOpen && (
+                <>
+                  <div 
+                    className="fixed inset-0 z-40"
+                    onClick={() => setIsLanguageDropdownOpen(false)}
+                  />
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute top-full right-0 mt-2 w-40 bg-dark-light border border-gold/20 rounded-lg shadow-xl z-50"
+                  >
+                    <button
+                      onClick={() => {
+                        setLanguage('en')
+                        setIsLanguageDropdownOpen(false)
+                      }}
+                      className={`w-full px-4 py-2 text-left hover:bg-gold/10 transition-colors ${
+                        language === 'en' ? 'text-gold' : 'text-gray-300'
+                      }`}
+                    >
+                      <i className="fas fa-flag mr-2"></i> English
+                    </button>
+                    <button
+                      onClick={() => {
+                        setLanguage('fr')
+                        setIsLanguageDropdownOpen(false)
+                      }}
+                      className={`w-full px-4 py-2 text-left hover:bg-gold/10 transition-colors ${
+                        language === 'fr' ? 'text-gold' : 'text-gray-300'
+                      }`}
+                    >
+                      <i className="fas fa-flag mr-2"></i> Français
+                    </button>
+                  </motion.div>
+                </>
+              )}
+            </div>
 
             {/* Theme Toggle */}
             <ClickSpark>

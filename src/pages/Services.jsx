@@ -167,20 +167,31 @@ function Services() {
                             {property.sqft} {t('services_sqft')}
                           </div>
                         </div>
-                        <div className="flex gap-4 mt-auto flex-shrink-0">
+                        <div className="flex flex-col sm:flex-row gap-3 mt-auto flex-shrink-0 items-stretch">
                           <a
                             href={`https://wa.me/971585926244?text=Hello, I'm interested in the ${property.name}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex-1 px-4 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all text-center text-sm"
+                            aria-label={t('contact_whatsapp')}
+                            className="flex-1 min-w-0 inline-flex items-center gap-3 justify-center px-5 py-3 text-sm bg-gradient-to-r from-green-600 to-green-500 text-white font-semibold rounded-md shadow-sm hover:shadow-md transform transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-green-400"
                           >
-                            <i className="fab fa-whatsapp mr-2"></i>WhatsApp
+                            <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                              <i className="fab fa-whatsapp text-lg"></i>
+                            </span>
+                            <span className="hidden sm:inline">{t('contact_whatsapp')}</span>
+                            <span className="inline sm:hidden">Contact via...</span>
                           </a>
+
                           <a
                             href={`mailto:donpepeservices@proton.me?subject=Inquiry about ${property.name}`}
-                            className="flex-1 px-4 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all text-center text-sm"
+                            aria-label={t('contact_email')}
+                            className="flex-1 min-w-0 inline-flex items-center gap-3 justify-center px-5 py-3 text-sm bg-gradient-to-r from-red-600 to-red-500 text-white font-semibold rounded-md shadow-sm hover:shadow-md transform transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-red-400"
                           >
-                            <i className="fas fa-envelope mr-2"></i>Email
+                            <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                              <i className="fas fa-envelope text-lg"></i>
+                            </span>
+                            <span className="hidden sm:inline">{t('contact_email')}</span>
+                            <span className="inline sm:hidden">Contact via...</span>
                           </a>
                         </div>
                       </div>
