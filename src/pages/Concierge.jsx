@@ -30,7 +30,7 @@ function Concierge() {
         
         <div className="relative z-10 container mx-auto px-4 text-center">
           <motion.h1
-            className="text-6xl md:text-8xl font-serif text-gold mb-6 uppercase tracking-wider"
+            className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-serif text-gold mb-4 sm:mb-6 uppercase tracking-wider"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -38,7 +38,7 @@ function Concierge() {
             {t('nav_concierge')}
           </motion.h1>
           <motion.p
-            className="text-xl text-gray-300"
+            className="text-base sm:text-lg md:text-xl text-gray-300 px-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -56,15 +56,15 @@ function Concierge() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-12 sm:mb-16 px-4"
           >
-            <h2 className="text-5xl font-serif text-gold mb-4">{t('luxury_concierge')}</h2>
-            <p className="text-gray-400 text-lg max-w-3xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-gold mb-4">{t('luxury_concierge')}</h2>
+            <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-3xl mx-auto">
               {t('concierge_service_desc')}
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {services.map((service, index) => (
               <motion.div
                 key={service.icon}
@@ -76,18 +76,18 @@ function Concierge() {
               >
                 <ClickSpark>
                   <Dock>
-                    <div className="p-8 bg-dark-light border border-gold/20 rounded-xl hover:border-gold transition-all glow-effect h-full flex flex-col">
+                    <div className="p-6 sm:p-8 bg-dark-light border border-gold/20 rounded-xl hover:border-gold transition-all glow-effect h-full flex flex-col">
                       <motion.div
-                        className="text-6xl text-gold mb-6"
+                        className="text-4xl sm:text-5xl md:text-6xl text-gold mb-4 sm:mb-6"
                         whileHover={{ scale: 1.1, rotate: 5 }}
                       >
                         <i className={`fas fa-${service.icon}`}></i>
                       </motion.div>
-                      <h3 className="text-2xl font-serif text-gold mb-4">{service.titleKey ? t(service.titleKey) : service.title}</h3>
-                        <p className="text-gray-400 leading-relaxed flex-grow">{service.descriptionKey ? t(service.descriptionKey) : service.description}</p>
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-serif text-gold mb-3 sm:mb-4">{service.titleKey ? t(service.titleKey) : service.title}</h3>
+                        <p className="text-gray-400 text-sm sm:text-base leading-relaxed flex-grow">{service.descriptionKey ? t(service.descriptionKey) : service.description}</p>
                       <Link
                         to="/contact"
-                        className="inline-block mt-6 text-gold font-semibold hover:translate-x-2 transition-transform"
+                        className="inline-block mt-4 sm:mt-6 text-gold font-semibold text-sm sm:text-base hover:translate-x-2 transition-transform"
                       >
                         {t('book_service')} →
                       </Link>

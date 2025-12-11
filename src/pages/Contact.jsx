@@ -73,7 +73,7 @@ function Contact() {
         
         <div className="relative z-10 container mx-auto px-4 text-center">
           <motion.h1
-            className="text-6xl md:text-8xl font-serif text-gold mb-6 uppercase tracking-wider"
+            className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-serif text-gold mb-4 sm:mb-6 uppercase tracking-wider"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -81,7 +81,7 @@ function Contact() {
             {t('nav_contact')}
           </motion.h1>
           <motion.p
-            className="text-xl text-gray-300"
+            className="text-base sm:text-lg md:text-xl text-gray-300 px-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -282,8 +282,6 @@ function Contact() {
                             <span>{office.address}</span>
                           </p>
                           <p className="flex items-center gap-3">
-                            <i className="fas fa-phone text-gold"></i>
-                            <span>{office.phone}</span>
                           </p>
                           <p className="flex items-center gap-3">
                             <i className="fas fa-clock text-gold"></i>

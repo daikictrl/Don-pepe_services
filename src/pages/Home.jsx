@@ -96,7 +96,7 @@ function Home() {
           className="relative z-10 container mx-auto px-4 text-center"
         >
           <motion.h1
-            className="text-6xl md:text-8xl lg:text-9xl font-serif mb-6 bg-gradient-to-r from-gold via-gold-light via-purple-light to-gold bg-clip-text text-transparent"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-serif mb-4 sm:mb-6 bg-gradient-to-r from-gold via-gold-light via-purple-light to-gold bg-clip-text text-transparent"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -105,7 +105,7 @@ function Home() {
           </motion.h1>
           
           <motion.p
-            className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed"
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto mb-8 sm:mb-12 px-2 leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -114,7 +114,7 @@ function Home() {
           </motion.p>
 
           <motion.div
-            className="flex gap-6 justify-center flex-wrap"
+            className="flex gap-3 sm:gap-6 justify-center flex-col sm:flex-row w-full sm:w-auto px-4 sm:px-0"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -123,7 +123,7 @@ function Home() {
               <Dock>
                 <Link
                   to="/services"
-                  className="px-8 py-4 bg-gradient-to-r from-gold to-gold-dark text-dark font-semibold rounded-lg shadow-lg glow-effect hover:shadow-xl transition-all uppercase tracking-wider"
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base bg-gradient-to-r from-gold to-gold-dark text-dark font-semibold rounded-lg shadow-lg glow-effect hover:shadow-xl transition-all uppercase tracking-wider"
                 >
                   {t('btn_explore')}
                 </Link>
@@ -134,7 +134,7 @@ function Home() {
               <Dock>
                 <Link
                   to="/concierge"
-                  className="px-8 py-4 border-2 border-gold text-gold font-semibold rounded-lg hover:bg-gold/10 transition-all uppercase tracking-wider backdrop-blur-sm"
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base border-2 border-gold text-gold font-semibold rounded-lg hover:bg-gold/10 transition-all uppercase tracking-wider backdrop-blur-sm"
                 >
                   {t('btn_concierge')}
                 </Link>
@@ -155,8 +155,8 @@ function Home() {
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h2 className="text-5xl font-serif text-gold mb-6">{t('home_about_title')}</h2>
-            <div className="space-y-6 text-gray-300 text-lg leading-relaxed">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-gold mb-6 px-4">{t('home_about_title')}</h2>
+            <div className="space-y-4 sm:space-y-6 text-gray-300 text-base sm:text-lg leading-relaxed px-4">
               <p>{t('home_about_p1')}</p>
               <p>{t('home_about_p2')}</p>
               <p>{t('home_about_p3')}</p>
@@ -173,15 +173,15 @@ function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-12 sm:mb-16 px-4"
           >
-            <h2 className="text-5xl font-serif text-gold mb-4">{t('services_title')}</h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-gold mb-4">{t('services_title')}</h2>
+            <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
               {t('home_services_subtitle')}
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {services.map((service, index) => (
               <motion.div
                 key={service.icon}
@@ -195,20 +195,20 @@ function Home() {
                   <Dock>
                     <Link
                       to={service.link}
-                      className="block p-8 bg-dark border border-gold/20 rounded-xl hover:border-gold transition-all relative overflow-hidden"
+                      className="block p-6 sm:p-8 bg-dark border border-gold/20 rounded-xl hover:border-gold transition-all relative overflow-hidden h-full"
                     >
                       <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-10 transition-opacity`}></div>
                       <div className="relative z-10">
                         <motion.div
-                          className="text-6xl text-gold mb-6"
+                          className="text-4xl sm:text-5xl md:text-6xl text-gold mb-4 sm:mb-6"
                           whileHover={{ scale: 1.1, rotate: 5 }}
                         >
                           <i className={`fas fa-${service.icon}`}></i>
                         </motion.div>
-                        <h3 className="text-2xl font-serif text-gold mb-4">{service.title}</h3>
-                        <p className="text-gray-400 leading-relaxed">{service.description}</p>
+                        <h3 className="text-lg sm:text-xl md:text-2xl font-serif text-gold mb-3 sm:mb-4">{service.title}</h3>
+                        <p className="text-gray-400 text-sm sm:text-base leading-relaxed">{service.description}</p>
                         <motion.span
-                          className="inline-block mt-6 text-gold font-semibold group-hover:translate-x-2 transition-transform"
+                          className="inline-block mt-4 sm:mt-6 text-gold text-sm sm:text-base font-semibold group-hover:translate-x-2 transition-transform"
                         >
                           {t('btn_view_more')} →
                         </motion.span>
@@ -234,13 +234,13 @@ function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-12 sm:mb-16 px-4"
           >
-            <h2 className="text-5xl font-serif text-gold mb-4">{t('home_why_choose_title')}</h2>
-            <p className="text-gray-400 text-lg">{t('home_why_choose_subtitle')}</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-gold mb-4">{t('home_why_choose_title')}</h2>
+            <p className="text-gray-400 text-sm sm:text-base md:text-lg">{t('home_why_choose_subtitle')}</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
             {[
               {
                 icon: 'award',
@@ -269,13 +269,13 @@ function Home() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="p-6 bg-dark border border-gold/20 rounded-xl hover:border-gold transition-all text-center glow-effect"
+                className="p-4 sm:p-6 bg-dark border border-gold/20 rounded-xl hover:border-gold transition-all text-center glow-effect"
               >
-                <div className="text-5xl text-gold mb-4">
+                <div className="text-4xl sm:text-5xl text-gold mb-4">
                   <i className={`fas fa-${feature.icon}`}></i>
                 </div>
-                <h3 className="text-xl font-serif text-gold mb-3">{feature.title}</h3>
-                <p className="text-gray-400 text-sm">{feature.description}</p>
+                <h3 className="text-lg sm:text-xl font-serif text-gold mb-3">{feature.title}</h3>
+                <p className="text-gray-400 text-xs sm:text-sm">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -283,7 +283,7 @@ function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-gold/20 via-purple/20 to-gold/20 relative overflow-hidden">
+      <section className="py-16 sm:py-20 bg-gradient-to-r from-gold/20 via-purple/20 to-gold/20 relative overflow-hidden">
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -291,8 +291,8 @@ function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-5xl font-serif text-gold mb-6">{t('home_cta_ready')}</h2>
-            <p className="text-gray-300 text-xl mb-10 max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-gold mb-4 sm:mb-6">{t('home_cta_ready')}</h2>
+            <p className="text-gray-300 text-sm sm:text-base md:text-lg mb-8 sm:mb-10 max-w-2xl mx-auto px-2">
               {t('home_cta_contact')}
             </p>
             <ClickSpark>
@@ -300,7 +300,7 @@ function Home() {
                 <Link
                   to="/contact"
                   onClick={handleNavClick}
-                  className="inline-block px-10 py-5 bg-gradient-to-r from-gold to-gold-dark text-dark font-semibold rounded-lg shadow-lg glow-effect hover:shadow-xl transition-all uppercase tracking-wider text-lg"
+                  className="inline-block px-6 sm:px-10 py-3 sm:py-5 bg-gradient-to-r from-gold to-gold-dark text-dark font-semibold rounded-lg shadow-lg glow-effect hover:shadow-xl transition-all uppercase tracking-wider text-sm sm:text-base md:text-lg"
                 >
                   {t('home_cta_get_started')}
                 </Link>

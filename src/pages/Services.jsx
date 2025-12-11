@@ -88,7 +88,7 @@ function Services() {
         
         <div className="relative z-10 container mx-auto px-4 text-center">
           <motion.h1
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-serif text-gold mb-6 uppercase tracking-wider"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif text-gold mb-4 sm:mb-6 uppercase tracking-wider"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -119,10 +119,10 @@ function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16 px-4"
+            className="text-center mb-12 sm:mb-16 px-4"
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-gold mb-4">{t('properties_title')}</h2>
-            <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto px-4">
+            <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">
               {t('exclusive_villas')}
             </p>
           </motion.div>
@@ -217,10 +217,10 @@ function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-12 px-4"
+            className="text-center mb-12 sm:mb-16 px-4"
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-gold mb-4">{t('vehicles_title')}</h2>
-            <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto px-4">
+            <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">
               {t('services_vehicles_desc')}
             </p>
           </motion.div>
