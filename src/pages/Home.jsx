@@ -118,7 +118,7 @@ function Home() {
           </motion.p>
 
           <motion.div
-            className="flex gap-3 sm:gap-6 justify-center flex-col sm:flex-row w-full sm:w-auto px-4 sm:px-0"
+            className="flex gap-4 sm:gap-6 justify-center flex-col sm:flex-row max-w-md sm:max-w-none mx-auto"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -127,7 +127,7 @@ function Home() {
               <Dock>
                 <Link
                   to="/services"
-                  className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base bg-gradient-to-r from-gold to-gold-dark text-dark font-semibold rounded-lg shadow-lg glow-effect hover:shadow-xl transition-all uppercase tracking-wider"
+                  className="block text-center px-8 py-4 text-sm sm:text-base bg-gradient-to-r from-gold to-gold-dark text-dark font-semibold rounded-lg shadow-lg glow-effect hover:shadow-xl transition-all uppercase tracking-wider whitespace-nowrap"
                 >
                   {t('btn_explore')}
                 </Link>
@@ -138,7 +138,7 @@ function Home() {
               <Dock>
                 <Link
                   to="/concierge"
-                  className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base border-2 border-gold text-gold font-semibold rounded-lg hover:bg-gold/10 transition-all uppercase tracking-wider backdrop-blur-sm"
+                  className="block text-center px-8 py-4 text-sm sm:text-base border-2 border-gold text-gold font-semibold rounded-lg hover:bg-gold/10 transition-all uppercase tracking-wider backdrop-blur-sm whitespace-nowrap"
                 >
                   {t('btn_concierge')}
                 </Link>
