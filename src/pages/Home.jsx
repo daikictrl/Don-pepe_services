@@ -52,7 +52,7 @@ function Home() {
         {/* Animated Background with Spotlight Effect */}
         <div className="absolute inset-0 z-0 spotlight">
           <div className="absolute inset-0 bg-gradient-to-br from-dark via-dark-light via-purple-dark/20 to-dark"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(212,175,55,0.1),transparent_70%)] animate-pulse-slow"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(212,175,55,0.1),transparent_100%)] animate-pulse-slow"></div>
         </div>
 
         {/* Glow Orbs */}
@@ -82,19 +82,25 @@ function Home() {
           }}
         />
 
-        {/* 3D Car */}
+        {/* 3D Car - Visible on all screen sizes, larger and more prominent */}
         <motion.div
           style={{ opacity, scale }}
-          className="absolute right-10 top-1/2 -translate-y-1/2 z-10 w-96 h-64 hidden lg:block"
+          className="absolute inset-0 z-0 pointer-events-none"
         >
-          <Hero3D />
+          <div className="absolute inset-0 flex items-center justify-center opacity-70 sm:opacity-80 md:opacity-85 lg:opacity-90">
+            <div className="w-full h-full max-w-6xl max-h-[500px] sm:max-h-[600px] lg:max-h-[700px] xl:max-h-[800px]">
+              <Hero3D scrollProgress={scrollYProgress} />
+            </div>
+          </div>
         </motion.div>
 
         {/* Hero Content */}
         <motion.div
           style={{ opacity }}
-          className="relative z-10 container mx-auto px-4 text-center"
+          className="relative z-20 container mx-auto px-4 text-center"
         >
+          {/* Subtle text backdrop for better readability without heavy blur */}
+          <div className="absolute inset-0 bg-gradient-to-b from-dark/40 via-dark/30 to-dark/40 rounded-3xl -z-10"></div>
           <motion.h1
             className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-serif mb-4 sm:mb-6 bg-gradient-to-r from-gold via-gold-light via-purple-light to-gold bg-clip-text text-transparent"
             initial={{ opacity: 0, y: 30 }}
