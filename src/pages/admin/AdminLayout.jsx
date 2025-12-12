@@ -11,24 +11,46 @@ function AdminLayout() {
   const { theme } = useTheme()
   const { language, setLanguage } = useLanguage()
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   return (
     <div className="min-h-screen bg-dark">
-      <AdminSidebar />
-      <main className="ml-64">
-        {/* Top Header with Language Selector */}
-        <header className="bg-dark-light border-b border-gold/20 px-6 py-4 sticky top-0 z-40">
-          <div className="flex items-center justify-end">
+      <AdminSidebar 
+        isMobileMenuOpen={isMobileMenuOpen} 
+        setIsMobileMenuOpen={setIsMobileMenuOpen} 
+      />
+      
+      {/* Main content area - responsive margin */}
+      <main className="lg:ml-64">
+        {/* Top Header with Mobile Menu Toggle & Language Selector */}
+        <header className="bg-dark-light border-b border-gold/20 px-4 sm:px-6 py-4 sticky top-0 z-30">
+          <div className="flex items-center justify-between">
+            {/* Mobile Menu Toggle - Only visible on mobile */}
+            <button
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg bg-gold/10 text-gold hover:bg-gold/20 transition-colors"
+            >
+              <i className="fas fa-bars"></i>
+            </button>
+
+            {/* Spacer for desktop */}
+            <div className="hidden lg:block"></div>
+
             {/* Language Selector */}
             <div className="relative">
               <ClickSpark>
                 <Dock>
                   <button
                     onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-                    className="flex items-center gap-2 px-4 py-2 bg-gold/10 border border-gold/20 rounded-lg text-gray-300 hover:bg-gold/20 hover:text-gold transition-all"
+                    className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-gold/10 border border-gold/20 rounded-lg text-gray-300 hover:bg-gold/20 hover:text-gold transition-all"
                   >
                     <i className="fas fa-globe text-gold"></i>
-                    <span className="text-sm font-semibold uppercase">{language === 'en' ? 'English' : 'Français'}</span>
+                    <span className="text-sm font-semibold uppercase hidden sm:inline">
+                      {language === 'en' ? 'English' : 'Français'}
+                    </span>
+                    <span className="text-sm font-semibold uppercase sm:hidden">
+                      {language === 'en' ? 'EN' : 'FR'}
+                    </span>
                     <i className={`fas fa-chevron-${isLangDropdownOpen ? 'up' : 'down'} text-xs text-gold`}></i>
                   </button>
                   {isLangDropdownOpen && (
@@ -67,8 +89,8 @@ function AdminLayout() {
           </div>
         </header>
         
-        {/* Page Content */}
-        <div className="p-6">
+        {/* Page Content - Responsive padding */}
+        <div className="p-4 sm:p-6">
           <Outlet />
         </div>
       </main>
@@ -77,7 +99,3 @@ function AdminLayout() {
 }
 
 export default AdminLayout
-
-
-
-
