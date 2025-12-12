@@ -8,6 +8,7 @@ import Dock from '../animations/Dock'
 
 function AdminSidebar() {
   const { user, logout } = useAuth()
+  const { t } = useLanguage()
   const location = useLocation()
   const navigate = useNavigate()
 
